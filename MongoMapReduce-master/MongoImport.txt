@@ -1,0 +1,1 @@
+mongoimport --db zips "\MongoDB 2.6 Standard\mongodb\zips.json"
