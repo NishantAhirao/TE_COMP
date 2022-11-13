@@ -1,0 +1,82 @@
+CREATE DATABASE cursors;
+use cursors;
+create table new_roll(roll integer, name varchar(10));
+create table old_roll(roll integer, name varchar(10));
+insert into new_roll values(2,'shweta');
+insert into new_roll values(4,'nikita');
+insert into new_roll values(5,'vikrant');
+insert into new_roll values(1,'palak');
+
+insert into old_roll values(2,'shweta');
+insert into old_roll values(4,'nikita');
+insert into old_roll values(3,'pranita');
+insert into old_roll values(1,'palak');
+insert into old_roll values(5,'vikrant');
+
+select * from new_roll;
++------+---------+
+| roll | name    |
++------+---------+
+|    2 | shweta  |
+|    4 | nikita  |
+|    5 | vikrant |
+|    1 | palak   |
++------+---------+
+ select * from old_roll;
++------+---------+
+| roll | name    |
++------+---------+
+|    2 | shweta  |
+|    4 | nikita  |
+|    3 | pranita |
+|    1 | palak   |
+|    5 | vikrant |
++------+---------+
+
+DELIMITER $
+CREATE PROCEDURE roll_list()
+BEGIN
+DECLARE a int;
+DECLARE a1 varchar(10);
+DECLARE b int;
+DECLARE b1 varchar(10);
+DECLARE done int default false;
+DECLARE c1 cursor for select roll,name from old_roll;
+DECLARE c2 cursor for select roll,name from new_roll;
+DECLARE continue handler for not found set done=true;
+OPEN c1;
+OPEN c2;
+loop1:loop
+FETCH c1 into a,a1;
+if done then
+leave loop1;
+end if;
+loop2:loop
+FETCH c2 into b,b1;
+if done then
+insert into new_roll values(a,a1);
+leave loop2;
+end if;
+if a=b then leave loop2;
+end if;
+end loop;
+end loop;
+CLOSE c1;
+CLOSE c2;
+end;
+$;
+
+CALL roll_list()$;
+SELECT * FROM new_roll$;
++------+---------+
+| roll | name    |
++------+---------+
+|    2 | shweta  |
+|    4 | nikita  |
+|    5 | vikrant |
+|    1 | palak   |
+|    3 | pranita |
++------+---------+
+
+
+

@@ -1,0 +1,95 @@
+ create table client_master( id integer primary key not null,data integer);
+
+insert into client_master values(1,1500);
+
+insert into client_master values(2,1000);
+
+insert into client_master values(3,2000);
+
+insert into client_master values(4,2055);
+
+
+delimiter //
+create trigger after_delete
+after delete on client_master
+for each row
+begin
+insert into audit_table
+set action='DELETE',
+id=old.id,
+data=old.data;
+end
+//
+
+
+delimiter //
+create trigger after_update
+after update on client_master
+for each row
+begin
+insert into audit_table
+set action='UPDATE',
+id=old.id,
+data=old.data;
+end
+//
+
+
+select * from client_master;//
++----+------+
+| id | data |
++----+------+
+|  1 | 1500 |
+|  2 | 1000 |
+|  3 | 2000 |
+|  4 | 2055 |
++----+------+
+
+create table audit_table(action text,id integer,data integer);//
+
+delete from client_master where id=1;//
+
+select * from client_master;//
++----+------+
+| id | data |
++----+------+
+|  2 | 1000 |
+|  3 | 2000 |
+|  4 | 2055 |
++----+------+
+
+select * from audit_table;//
++--------+------+------+
+| action | id   | data |
++--------+------+------+
+| DELETE |    1 | 1500 |
++--------+------+------+
+
+
+update client_master set data = 9050 where id=4; //
+select * from client_master;//
++----+------+
+| id | data |
++----+------+
+|  2 | 1000 |
+|  3 | 2000 |
+|  4 | 9050 |
++----+------+
+
+select * from audit_table;//
++--------+------+------+
+| action | id   | data |
++--------+------+------+
+| DELETE |    1 | 1500 |
+| UPDATE |    4 | 2055 |
++--------+------+------+
+
+
+
+
+
+
+
+
+
+

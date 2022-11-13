@@ -1,0 +1,42 @@
+create table Emp(e_no integer primary key not null, e_name text, salary integer);
+
+create table tracking(e_no integer, salary integer);
+
+delimiter //
+create trigger after_insert
+after insert
+on Emp
+for each row
+begin
+if(new.salary < 50000) then
+signal sqlstate '45000' set message_text ='Rejected!!!';
+end if;
+insert into tracking
+set e_no = new.e_no, salary = new.salary;
+end;
+//
+
+insert into Emp values(2001, 'sushant',40000)//;
+ERROR 1644 (45000): Rejected!!!
+
+insert into Emp values(2002, 'shweta',55000)//;
+Query OK, 1 row affected (0.01 sec)
+
+
+insert into Emp values(2004, 'sriya',54000)//;
+Query OK, 1 row affected (0.01 sec)
+
+
+insert into Emp values(2006, 'kim',15000)//;
+ERROR 1644 (45000): Rejected!!!
+
+select * from Emp;
++------+--------+--------+
+| e_no | e_name | salary |
++------+--------+--------+
+| 2002 | shweta |  55000 |
+| 2004 | sriya  |  54000 |
++------+--------+--------+
+
+
+

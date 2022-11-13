@@ -1,0 +1,38 @@
+ create database clientmaster
+ use clientmaster
+ create table client_master( id integer primary key not null,bal_due integer);
+
+insert into client_master (id,bal_due) values (1,500);
+insert into client_master (id,bal_due) values (2,700);
+insert into client_master (id,bal_due) values (3,-300);
+insert into client_master (id,bal_due) values (4,-400);
+insert into client_master (id,bal_due) values (5,800);
+
+delimiter //
+create procedure check_br(in uid int)
+begin
+declare temp_bal int;
+declare sp condition for sqlstate'45000';
+select bal_due into temp_bal from client_master where id=uid;
+if temp_bal<0 then
+signal sqlstate '45000'
+set message_text='BR violated';
+else
+select 'BR not violated' Message;
+end if;
+end
+//
+
+CALL check_br(1);
+//
++-----------------+
+| Message         |
++-----------------+
+| BR not violated |
++-----------------+
+
+
+CALL check_br(3)//;
+ERROR 1644 (45000): BR violated
+
+DIMILARLY CALL procedure FOR REST IDS.

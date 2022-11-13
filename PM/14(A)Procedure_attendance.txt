@@ -1,0 +1,61 @@
+CREATE TABLE stud1(roll_no integer, attendance integer, status varchar(7));
+insert into stud1 values(01,85,'NA');
+insert into stud1 values(02,90,'NA');
+insert into stud1 values(03,65,'NA');
+insert into stud1 values(04,70,'NA');
+insert into stud1 values(05,68,'NA');
+insert into stud1 values(06,42,'NA');
+insert into stud1 values(07,50,'NA');
+insert into stud1 values(08,95,'NA');
+
+SELECT * FROM STUD1;
++---------+------------+--------+
+| roll_no | attendance | status |
++---------+------------+--------+
+|       1 |         85 | NA     |
+|       2 |         90 | NA     |
+|       3 |         65 | NA     |
+|       4 |         70 | NA     |
+|       5 |         68 | NA     |
+|       6 |         42 | NA     |
+|       7 |         50 | NA     |
+|       8 |         95 | NA     |
++---------+------------+--------+
+ 
+DELIMITER $
+CREATE PROCEDURE ATTEND_CAL(IN roll int)
+begin
+declare attend int;
+select attendance into attend from stud1 where roll_no = roll;
+if attend<75 then
+update stud1 set status ='ND' WHERE roll_no=roll;
+else
+update stud1 set status ='D' where roll_no=roll;
+end if;
+end;
+$
+
+ CALL ATTEND_CAL(01)$;
+ CALL ATTEND_CAL(02)$;
+ CALL ATTEND_CAL(03)$;
+ CALL ATTEND_CAL(04)$;
+ CALL ATTEND_CAL(05)$;
+ CALL ATTEND_CAL(06)$;
+ CALL ATTEND_CAL(07)$;
+ CALL ATTEND_CAL(08)$;
+
+ SELECT * FROM STUD1$;
+
++---------+------------+--------+
+| roll_no | attendance | status |
++---------+------------+--------+
+|       1 |         85 | D      |
+|       2 |         90 | D      |
+|       3 |         65 | ND     |
+|       4 |         70 | ND     |
+|       5 |         68 | ND     |
+|       6 |         42 | ND     |
+|       7 |         50 | ND     |
+|       8 |         95 | D      |
++---------+------------+--------+
+

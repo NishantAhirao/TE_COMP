@@ -1,6 +1,6 @@
 Write PL/SQL block using explicit cursor for following requirements: 
 College has decided to mark all those students detained (D) who are having attendance less than 75%.
- Whenever such update takes place, a record for the same is maintained in the D_Stud table. 
+Whenever such update takes place, a record for the same is maintained in the D_Stud table. 
 
 
 create table stud21(roll number(4), att number(4), status varchar(1));

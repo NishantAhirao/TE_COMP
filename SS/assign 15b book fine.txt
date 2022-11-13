@@ -35,14 +35,12 @@ select dateofissue into issuedate from borrow where roll_no=rno and nameofbook=b
 select datediff (curdate(),issuedate) into diff;
 if (diff>15 and diff<30) then
 set fine_amt = diff*5;
-insert into fine values(rno, curdate(),fine_amt);
 elseif(diff>30) then
 set fine_amt = diff*50;
-insert into fine values(rno, curdate(),fine_amt);
 elseif(diff<15) then
 set fine_amt = 0;
-insert into fine values(rno, curdate(),fine_amt);
 end if;
+insert into fine values(rno, curdate(),fine_amt);
 update borrow set status ='R' where roll_no=rno and nameofbook=bookname;
 end;
 $

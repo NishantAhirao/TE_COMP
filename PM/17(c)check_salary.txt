@@ -1,0 +1,60 @@
+ create table Emp(e_no integer primary key not null, d_no integer, salary integer);
+ create table dept_salary(d_no integer, Avg_salary integer);
+
+insert into Emp values(2001, 1001, 5000); //
+Query OK, 1 row affected (0.01 sec)
+
+insert into Emp values(2002, 1001, 7000); //
+Query OK, 1 row affected (0.01 sec)
+
+insert into Emp values(2003, 1002, 10000); //
+Query OK, 1 row affected (0.01 sec)
+
+insert into Emp values(2004, 1002, 20000); //
+Query OK, 1 row affected (0.00 sec)
+
+select * from Emp; //
++------+------+--------+
+| e_no | d_no | salary |
++------+------+--------+
+| 2001 | 1001 |   5000 |
+| 2002 | 1001 |   7000 |
+| 2003 | 1002 |  10000 |
+| 2004 | 1002 |  20000 |
++------+------+--------+
+
+delimiter //
+create procedure check_s()
+begin
+declare temp_emp int;
+declare temp_salary int;
+declare temp_dno int;
+declare avg_salary int;
+declare temp_dno_dept_salary int;
+declare ec boolean;
+declare curl cursor for select avg(salary),d_no from Emp group by d_no;
+declare continue handler for not found set ec=true;
+open curl;
+l1:loop
+fetch curl into temp_salary, temp_dno;
+insert into dept_salary values(temp_salary,temp_dno);
+if ec then
+close curl;
+leave l1;
+end if;
+end loop l1;
+end;
+//
+
+call check_s(); //
+
+select * from dept_salary; //
+
++-------+------------+
+| d_no  | Avg_salary |
++-------+------------+
+|  6000 |       1001 |
+| 15000 |       1002 |
+| 15000 |       1002 |
+
+

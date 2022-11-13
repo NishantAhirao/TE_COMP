@@ -1,0 +1,62 @@
+create table emp(e_no integer, salary integer);
+create table increment_t(eno integer, sal integer);
+
+delimiter //
+create procedure inc_salary()
+begin
+declare temp_salary int;
+declare temp_id int;
+declare avg_salary int;
+declare exitcond boolean;
+declare cur1 cursor for select e_no from emp;
+declare cur2 cursor for select salary from emp;
+declare continue handler for not found set exitcond=true;
+select avg(salary) into avg_salary from emp;
+open cur1;
+open cur2;
+l1:loop
+fetch cur1 into temp_id;
+fetch cur2 into temp_salary;
+if(temp_salary<avg_salary) then
+set temp_salary=temp_salary+temp_salary*0.1;
+insert into increment_t values(temp_id,temp_salary);
+end if;
+if exitcond then
+close cur1;
+close cur2;
+leave l1;
+end if;
+end loop l1;
+end
+//
+
+insert into emp values(1001,5000);//
+insert into emp values(1002,10000);//
+insert into emp values(1003,4000);//
+insert into emp values(1004,5000);//
+insert into emp values(1005,20000);//
+
+select * from emp; //
++------+--------+
+| e_no | salary |
++------+--------+
+| 1001 |   5000 |
+| 1002 |  10000 |
+| 1003 |   4000 |
+| 1004 |   5000 |
+| 1005 |  20000 |
++------+--------+
+
+call inc_salary(); //
+
+select * from increment_t;//
+
+------+------+
+| eno  | sal  |
++------+------+
+| 1001 | 5500 |
+| 1003 | 4400 |
+| 1004 | 5500 |
++------+------+
+
+

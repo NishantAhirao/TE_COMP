@@ -1,0 +1,43 @@
+create table account_master(ID int primary key,Current_balance int);
+
+insert into account_master values(1,10000);
+insert into account_master values(2,5000);
+insert into account_master values(3,60000);
+
+select*from account_master;
+
+
+delimiter //
+create procedure withdraw(in acc_id int,in amt int)
+begin
+declare bal int;
+declare sp condition for sqlstate '45000';
+select Current_balance into bal from account_master where ID=acc_id;
+if bal<amt then
+signal sqlstate '45000'
+set message_text='NotEnoughBalance';
+else
+set bal = bal-amt;
+update account_master set Current_balance=bal where ID=acc_id;
+end if;
+end;
+//
+
+
+create procedure deposit(in acc_id int,in amt int)
+begin
+declare bal int;
+select current_balance into bal from account_master where ID=acc_id;
+update account_master set current_balance=bal+amt where ID=acc_id;
+end;
+//
+
+
+call withdraw(3,40000);
+select*from account_master;
+
+call deposit(2,2000);
+select*from account_master;
+
+call withdraw(1,75000);
+ERROR 1644 (45000): NotEnoughBalance
