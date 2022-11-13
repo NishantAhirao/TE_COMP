@@ -1421,6 +1421,20 @@ db.games.find({"achievements":"Game-master,Speed-daemon"}).pretty()
 
 8. Write a query that returns only games that have achievements
 
+25. Using MapReduce in mongodb solve following queries on given below collection.
+{
+“id” : 0,
+“name” : “Leanne Flinn”,
+“email” : “leanne.flinn@unilogic.com”,
+“work” :”Unilogic” ,
+“age” :27
+“gender” :”Male”
+“Salary” :16660
+“hobbies”:”Acrobatics,Photography,Papier-Mache”
+}
+
+
+
 26. Using MapReduce in mongodb solve following queries on given below collection. 
 1. Import zip.json.
  
