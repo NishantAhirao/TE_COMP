@@ -1,0 +1,84 @@
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~$ lex mjava.l
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~$ gcc lex.yy.c
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~$ ./a.out
+hi i am fine
+
+	 variable is a:=hi 
+	 variable is a:=i 
+	 variable is a:=am 
+	 variable is a:=fine
+i will talk until i die
+
+	 variable is a:=i 
+	 variable is a:=will 
+	 variable is a:=talk 
+	 keyword is a:=until 
+	 variable is a:=i 
+	 variable is a:=die
+
+
+------------------------------------------------------------------------------------------------------------
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran/Assignment 7$ lex mjava.l
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran/Assignment 7$ gcc lex.yy.c
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran/Assignment 7$ ./a.out xyz.java
+
+	 import java.io.*; is a preprocessor directives
+
+
+	 variable is a:=public 
+	 variable is a:=static 
+	 keyword is a:=void 
+	 system function:=main 
+	 symbol or bracket is a:=(
+	 variable is a:=String []
+	 variable is a:=args
+	 symbol or bracket is a:=) 
+
+	 symbol or bracket is a:={
+
+
+	 keyword is a:=int 
+	 variable is a:=x
+	 operator is a:==
+	Digit is a:=5
+	Digit is a:=0
+	 punctuation is a:=,
+	 variable is a:=y
+	 operator is a:==
+	Digit is a:=7
+	Digit is a:=0
+	 punctuation is a:=;
+
+	 keyword is a:=if
+	 symbol or bracket is a:=(
+	 variable is a:=x
+	 operator is a:==
+	 variable is a:=y
+	 symbol or bracket is a:=)
+
+	 symbol or bracket is a:={
+
+	 system function:=System.out.println
+	 symbol or bracket is a:=(
+	 word is a:= "x and y are same"
+	 symbol or bracket is a:=)
+	 punctuation is a:=;
+
+	 symbol or bracket is a:=}
+
+
+	 keyword is a:=else
+
+	 symbol or bracket is a:={
+
+	 system function:=System.out.println 
+	 symbol or bracket is a:=(
+	 word is a:= "x and y are different"
+	 symbol or bracket is a:=)
+	 punctuation is a:=;
+
+	 symbol or bracket is a:=}
+
+
+	 symbol or bracket is a:=}
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran/Assignment 7$ ^C

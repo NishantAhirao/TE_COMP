@@ -1,0 +1,4 @@
+
+lex num.l
+gcc  lex.yy.c -ly -ll 
+./a.out

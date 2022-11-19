@@ -1,0 +1,53 @@
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 07/B2-tokenTable$ lex tokentable.l
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 07/B2-tokenTable$ gcc lex.yy.c
+tokentable.l: In function ‘main’:
+tokentable.l:76:8: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char (*)[20]’ [-Wformat=]
+  scanf("%s",&fnm);
+        ^~~~ ~~~~
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 07/B2-tokenTable$ ./a.out
+Enter the File name:sample.java
+
+
+
+
+		    TOKEN TABLE
+
+	   LEXeme			NAME
+	____________		___________________
+
+	import java.io.*;			All header files
+	public static void main(String[]args)			System Function
+	{			OCB
+	int			Keyword
+	x			identifier
+	=			Assignment OP
+	50			const integer literal
+	,			Comma
+	y			identifier
+	=			Assignment OP
+	70			const integer literal
+	;			Semicolon
+	if			Keyword
+	(			ORB
+	x			identifier
+	=			Assignment OP
+	y			identifier
+	)			CRB
+	{			OCB
+	System.out.println			System Function
+	(			ORB
+	"x and y are same"			string literal
+	)			CRB
+	;			Semicolon
+	}			CCB
+	else			Keyword
+	{			OCB
+	System.out.println			System Function
+	(			ORB
+	"x and y are different"			string literal
+	)			CRB
+	;			Semicolon
+	}			CCB
+	}			CCB
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 07/B2-tokenTable$ B
+

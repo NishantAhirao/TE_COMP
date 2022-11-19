@@ -1,0 +1,52 @@
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran$ lex name.l
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran$ gcc lex.yy.c
+name.l: In function ‘yylex’:
+name.l:10:9: warning: format ‘%s’ expects a matching ‘char *’ argument [-Wformat=]
+ [{] {printf("%s :code block begin");}
+         ^~~~~~~~~~~~~~~~~~~~~~
+name.l:11:9: warning: format ‘%s’ expects a matching ‘char *’ argument [-Wformat=]
+ [}] {printf("%s :code block end");}
+         ^~~~~~~~~~~~~~~~~~~~
+name.l: At top level:
+name.l:14:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ main()
+ ^~~~
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran$ ./a.out
+
+class its a keyword
+
+  name its a identifier....
+
+  :code block begin
+ 
+public its a keyword
+
+ 
+static its a keyword
+
+ 
+void its a keyword
+
+ 
+main( : Main function
+
+
+String its a keyword
+
+ 
+Args its a keyword
+
+[])
+  :code block begin
+ 
+System.out.println its a keyword
+
+("1  DYPIET its a identifier....
+  Pimpri its a identifier....
+ 411 018 ")
+; its a deliminators
+ 
+  :code block end
+  :code block end
+ubuntu@ubuntu-HP-285-Pro-G1-MT:~/kiran$ 
+

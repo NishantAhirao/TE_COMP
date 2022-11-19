@@ -1,0 +1,28 @@
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ lex simcom.l
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ yacc simcom.y
+simcom.y: warning: 2 shift/reduce conflicts [-Wconflicts-sr]
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ gcc lex.yy.c y.tab.c
+
+y.tab.c: In function ‘yyparse’:
+y.tab.c:1202:16: warning: implicit declaration of function ‘yylex’ [-Wimplicit-function-declaration]
+       yychar = yylex ();
+                ^~~~~
+y.tab.c:1343:7: warning: implicit declaration of function ‘yyerror’; did you mean ‘yyerrok’? [-Wimplicit-function-declaration]
+       yyerror (YY_("syntax error"));
+       ^~~~~~~
+       yyerrok
+simcom.y: At top level:
+simcom.y:75:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ main()
+ ^~~~
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ 
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ ./a.out
+Enter the exp: return 0;
+Statement is Simple statement.
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ ./a.out
+Enter the exp: if(a>b){printf("hi");}
+syntax error
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ ./a.out
+Enter the exp: if(a>b) then a=0; else a=10;
+Statement is Compound statement.
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/B5-SimpleCompound$ 

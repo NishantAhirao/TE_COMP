@@ -1,0 +1,22 @@
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/compound$ lex sentence.l
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/compound$ yacc sentence.y
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/compound$ gcc lex.yy.c y.tab.c
+kiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/compound$ ./a.out input
+NOUN	==>i
+VERB	==>am
+NOUN	==>shital
+CONJUNCTION	==>and
+PRONOUN	==>she
+VERB	==>is
+NOUN	==>like
+COMPOUND SENTENCE
+PREPOSITION	==>to
+ERROR:syntax errorkiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/compound$ ./a.out sample.txt
+NOUN	==>John
+VERB	==>is
+NOUN	==>a
+NOUN	==>boy
+SIMPLE SENTENCE
+ERROR:syntax errorkiran@kiran-LIFEBOOK-A555:~/spos assignment n writeup/Assignment 10/compound$ 
+
+
