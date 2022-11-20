@@ -1,0 +1,106 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner Sc=new Scanner(System.in);
+	    int n,temp,max;
+	    int tatsum=0;
+	    int wtsum=0;
+	    int tatavg,wtavg;
+	    System.out.println("enter the no of process");
+	    n=Sc.nextInt();
+		int at[]=new int[n];
+		int bt[]=new int[n];
+		int ct[]=new int[]{10,14,16,21};
+		int tat[]=new int[n];
+		int wt[]=new int[n];
+		int pt[]=new int[n];
+		
+		for(int i=0;i<n;i++)
+		{
+		    System.out.println("Enter the Arrival time of"+i+" Process");
+		    at[i]=Sc.nextInt();
+		    System.out.println("Enter the Burst Time of"+i+" Process");
+		    bt[i]=Sc.nextInt();
+		    System.out.println("Enter the Priority of"+i+" Process");
+		    pt[i]=Sc.nextInt();
+		}
+		
+		for(int i=0;i<n;i++)
+		{
+		    for(int j=0;j<n-i-1;j++)
+		    {
+		        if(at[j]>at[j+1])
+		        {
+		        temp=at[j];
+		        at[j]=at[j+1];
+		        at[j+1]=temp;
+		        
+		        temp=bt[j];
+		        bt[j]=bt[j+1];
+		        bt[j+1]=temp;
+		        
+		        temp=pt[j];
+		        pt[j]=pt[j+1];
+		        pt[j+1]=temp;
+		        }
+		    }
+		}
+		    
+		    for(int i=0;i<1;i++)
+		    {
+		        tat[i]=ct[i]-at[i];
+		    }
+		    max=at[1];
+		    for(int i=1;i>n;i++)
+		    {
+		        if(at[i]>max)
+		        max=at[i];
+		    }
+		    
+		    if(bt[0]>=max)
+		    {
+		       for(int i=0;i<n;i++)
+		       {
+		           for(int j=0;j<i-1;j++)
+		           {
+		               if(pt[j]>pt[j+1])
+		               {
+		                   temp=pt[j];
+		                   pt[j]=pt[j+1];
+		                   pt[j+1]=temp;
+		               }
+		           }
+		       }
+		       
+		       
+		       for(int i=1;i<n;i++)
+		       {
+		           tat[i]=ct[i]-at[i];
+		           
+		       }
+		       for(int i=1;i<n;i++)
+		       {
+		           wt[i]=tat[i]-bt[i];
+		       }
+		       
+		    }
+		    System.out.println("AT     BT       CT     PT       TAT     WT");
+		    for(int i=0;i<n;i++){
+		    System.out.println(at[i]+"\t"+bt[i]+"\t"+ct[i]+"\t"+ pt[i]+"\t "+tat[i]+"\t"+wt[i]);
+		    }
+		    	for(int i=0;i<n;i++)
+		{
+		    tatsum=tatsum+tat[i];
+		    wtsum=wtsum+wt[i];
+		}
+		wtavg=wtsum/n;
+		tatavg=tatsum/n;
+		System.out.println("Average Waiting Time:"+wtavg  );
+		System.out.println("Average Turnaround Time:"+tatavg);
+		
+		}
+		
+	
+	
+}

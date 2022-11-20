@@ -1,0 +1,184 @@
+1.	FIRST FIT ,BEST FIT , WORST FIT
+First FIT:
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner Sc=new Scanner(System.in);
+	    int n,size;
+	    System.out.println("Enter the no. of Blocks");
+	    size=Sc.nextInt();
+	    System.out.println("Enter the no. of process");
+	    n=Sc.nextInt();
+	    int process[]=new int[n];
+	    int ps[]=new int[n];
+	    int blocks[]=new int[size];
+	    
+	    System.out.println("Enter the process no and process Size");
+	    for(int i=0;i<n;i++)
+	    {
+	        process[i]=Sc.nextInt();
+	        ps[i]=Sc.nextInt();
+	    }
+	    System.out.println("Enter the block size");
+	    for(int i=0;i<size;i++)
+	    {
+	        blocks[i]=Sc.nextInt();
+	    }
+	    boolean allocate=false;
+	    for(int i=0;i<n;i++)
+	    {
+	        
+	        for(int j=0;j<size;j++)
+	        {
+	            if(ps[i]<=blocks[j]){
+	            System.out.println(ps[i]+" "+blocks[j]);
+	            blocks[j]=0;
+	            allocate=true;
+	             if(allocate==true)
+	            break;
+	            }
+	           
+	            
+	        }
+	    }
+	}
+}
+
+2.BEST FIT:
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner Sc=new Scanner(System.in);
+	    System.out.println("enter the no. of process");
+	    int n=Sc.nextInt();
+	    System.out.println("enter no. of blocks");
+	    int size=Sc.nextInt();
+	    int temp;
+		int process[]=new int[n];
+		int bs[]=new int[size];
+		int block[]=new int[size];
+		System.out.println("Enter the process sizes");
+		for(int i=0;i<n;i++)
+		{
+		    process[i]=Sc.nextInt();
+		}
+		System.out.println("Enter Block No and Block Size");
+		for(int i=0;i<n;i++)
+		{
+		    block[i]=Sc.nextInt();
+		    bs[i]=Sc.nextInt();
+		}
+		
+		for(int i=0;i<n-1;i++)
+		{
+		    for(int j=0;j<n-i-1;j++)
+		    {
+		        if(bs[j]>bs[j+1])
+		        {
+		            temp=bs[j];
+		            bs[j]=bs[j+1];
+		            bs[j+1]=temp;
+		            
+		            temp=block[j];
+		            block[j]=block[j+1];
+		            block[j+1]=temp;
+		           
+		        
+		        }
+		        
+		    }
+		}
+		
+		
+		
+		for(int i=0;i<n;i++)
+		{
+		    for(int j=0;j<n;j++)
+		    {
+		    if(process[i]<=bs[j])
+		    {
+		        System.out.println("Block \t Process");
+		       System.out.println(bs[j]+"\t "+ process[i]) ;
+		       break;
+		    }
+		    }
+		}
+	}
+}
+
+
+3.WORST FIT
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner Sc=new Scanner(System.in);
+	    int n;
+	    int b,temp;
+	    System.out.println("Enter the Total Process and Total Blocks");
+	    n=Sc.nextInt();
+	    b=Sc.nextInt();
+	    int ps[]=new int[n];
+	    int bs[]=new int[n];
+	    System.out.println("Enter the Processes and Blocks");
+
+	    for(int i=0;i<n;i++)
+	    {
+	        ps[i]=Sc.nextInt();
+	        bs[i]=Sc.nextInt();
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<n-i-1;j++)
+	        {
+	            if(ps[j]>ps[j+1])
+	        {
+	            temp=ps[j];
+	            ps[j]=ps[j+1];
+	            ps[j+1]=temp;
+	        }
+	        }
+	    }
+	    for(int i=0;i<b;i++)
+	    {
+	        for(int j=0;j<b-i-1;j++)
+	        {
+	            if(bs[j]<bs[j+1])
+	            {
+	                temp=bs[j];
+	                bs[j]=bs[j+1];
+	                bs[j+1]=temp;
+	            }
+	        }
+	    }
+	    	            System.out.println("Process  Block");    
+
+	    for(int i=0;i<n;i++)
+	    {
+	        boolean allocated=false;
+	        for(int j=0;j<b;j++)
+	        {
+	            if(ps[i]<=bs[j]){
+	             allocated=true;
+
+	            System.out.println(ps[i]+"\t | "+bs[j]);
+	            bs[j]=0;
+	            break;
+	            
+	            }
+	            
+	        }
+	        if(allocated ==false)
+	            System.out.println(ps[i]+"\t  NULL");
+	    }
+	    
+	}
+}
+
+
+
+
+
+
