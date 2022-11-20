@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Bankers
+public class Main
 {
  private int need[][],allocate[][],max[][],avail[][],np,nr;
  
@@ -75,6 +75,6 @@ public class Bankers
  
  public static void main(String[] args) 
  {
- new Bankers().isSafe();
+ new Main().isSafe();
  }
 }
