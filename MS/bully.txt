@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.Scanner;
+// importing the packages 
+// To comprehend how bullying algorithms function, create the class BullyAlgoExample.  
+class BullyAlgo{
+
+    // Regarding the process and its status, declare variables and arrays. 
+    static int noofprocess;
+    static int[] priority = new int[100];
+    static int[] S = new int[100];
+    static int C;
+
+    // main() method of the class  
+    public static void main(String[] args) throws IOException
+    {
+        // Taking input for the number of processes from the user
+        System. out.println("Select the no.of process that are to be done:");
+
+        // Object creation for scanner class  
+        Scanner sc = new Scanner(System.in);
+        noofprocess = sc.nextInt();
+
+        int i;
+
+        // Setting priorities for the process in the for loop  
+        for(i = 0; i<noofprocess; i++)
+        {
+            System.out.println("Status for process "+(i+1)+":");
+            S[i] = sc.nextInt();
+            System.out.println("Priority of the current process "+(i+1)+":");
+            priority[i] = sc.nextInt();
+        }
+
+        System.out.println("Which process have to be elected for initiation :");
+        int e = sc.nextInt();
+
+        sc.close();
+
+        // call electProcess() method   
+        electProcess(e);
+        System.out.println("After electing process the final coordinator is "+C);
+    }
+
+    // create electProcess() method   
+    static void electProcess(int e)
+    {
+        e = e - 1;
+        C = e + 1;
+
+        for(int i = 0; i<noofprocess; i++)
+        {
+            if(priority[e]<priority[i])
+            {
+                System.out.println("Election message is sent from "+(e+1)+" to "+(i+1));
+                if(S[i]==1)
+                    electProcess(i+1);
+            }
+        }
+    }
+}  
